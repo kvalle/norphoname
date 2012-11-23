@@ -1,3 +1,3 @@
-# *Nor*wegian *pho*netic *name* search in Lucene
+# Norwegian phonetic name search in Lucene
 
 TODO: content and code!
