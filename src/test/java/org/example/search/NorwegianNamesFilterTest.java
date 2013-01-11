@@ -11,9 +11,10 @@ public class NorwegianNamesFilterTest extends BaseTokenStreamTestCase {
 	
 	@Test
 	public void testAtFonetiskFilterFungerer() throws Exception {
-	    StringReader reader = new StringReader("Kåre Bannan");
+	    StringReader reader = new StringReader("Ola Nordmann");
 	    MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
 		TokenStream stream = new NorwegianNamesFilter(tokenizer);
-	    assertTokenStreamContents(stream, new String[] { "KR", "BNN" });
+	    assertTokenStreamContents(stream, new String[] { "OL", "NRDMN" });
 	}
+	
 }

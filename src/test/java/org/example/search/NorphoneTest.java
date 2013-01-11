@@ -8,8 +8,10 @@ public class NorphoneTest {
 
 	@Test
 	public void testNorphoneEncoding() throws Exception {
-		assertEquals(Norphone.encode("PÃ¥l"), Norphone.encode("Paal"));
-		assertEquals(Norphone.encode("Ketil"), Norphone.encode("Kjetil"));
+		assertEquals(Norphone.encode("Pål"), Norphone.encode("Paal"));
+		assertEquals(Norphone.encode("Pål"), Norphone.encode("Paul"));
+		System.out.println(Norphone.encode("Ola"));
+		System.out.println(Norphone.encode("Nordmann"));
 	}
 	
 }
