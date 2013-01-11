@@ -1,0 +1,53 @@
+/* http://localhost:8983/solr/select/?rows=10&indent=on&wt=json&q=paal */
+
+{
+  "responseHeader":{
+    "status":0,
+    "QTime":1,
+    "params":{
+      "indent":"on",
+      "wt":"json",
+      "q":"paal",
+      "rows":"10"}},
+  "response":{"numFound":40,"start":0,"maxScore":5.456771,"docs":[
+      {
+        "id":"239321",
+        "name":"PAAL BØRRESEN",
+        "score":5.456771},
+      {
+        "id":"246087",
+        "name":"PAAL MADSEN",
+        "score":5.456771},
+      {
+        "id":"239893",
+        "name":"PAAL ALEXANDER GREGERSEN",
+        "score":4.3654165},
+      {
+        "id":"238759",
+        "name":"PÅL BEHRINGER",
+        "score":0.9784653},
+      {
+        "id":"239432",
+        "name":"PÅL JAKOBSEN",
+        "score":0.9784653},
+      {
+        "id":"239642",
+        "name":"PAUL JENSEN",
+        "score":0.9784653},
+      {
+        "id":"239701",
+        "name":"PALLE AULESJORD",
+        "score":0.9784653},
+      {
+        "id":"242730",
+        "name":"PÅL BJØRKLI",
+        "score":0.9784653},
+      {
+        "id":"242845",
+        "name":"PÅL SØRENSEN",
+        "score":0.9784653},
+      {
+        "id":"243222",
+        "name":"PÅL HANSEN",
+        "score":0.9784653}]
+  }}
