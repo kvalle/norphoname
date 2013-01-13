@@ -60,18 +60,44 @@ The first filter splits tokens further if they contain word delimiters, e.g. "Bo
 
 The last filter, however, is one we'll need to provide.
 
-## Make the new field searchable
-
-*TODO: describe `solrconfig.xml`, discuss the **select** controller and the dismax query handler, and how it's used to enable searching on the phonetic field.*
-
 
 ## The FilterFactory
 
 *TODO: discuss the filterfactories specified in the analyzer filter chain, and describe the implementation.*
 
+
 ## The Filter
 
 *TODO: discuss the actual implementation of the filter class.*
+
+
+## Make the new field searchable
+
+In Solr, incomming queries are handled by different `RequestHandlers`.
+These are specified and configured in the [solrconfig.xml]() file.
+In order for our new `name_phonetic` field to be useful, we need to tell Solr to match queries against it.
+
+Below is an excerpt from `solrconfig.xml` showing the configuration of a pretty standard [SearchHandler](http://wiki.apache.org/solr/SearchHandler).
+
+	<requestHandler name="/select" class="solr.SearchHandler">
+	<lst name="defaults">
+	    <str name="echoParams">explicit</str>
+	    <int name="rows">10</int>
+	    <str name="df">name</str>
+	 <str name="defType">dismax</str>
+	    <str name="qf">name^3 name_phonetic</str>
+	    <str name="q.alt">*:*</str>
+	    <str name="fl">*,score</str>
+	</lst>
+	</requestHandler>
+
+The handler is configured to use the [dismax query mode](http://wiki.apache.org/solr/DisMax).
+The essential line here is the setting of the `qf` property.
+`qf` stands for *query fields*, and tells Solr which fields to match the query against.
+Also notice the `^3` used to *boost* the normal name search, i.e. telling Solr that an exact match is three times more important than a phonetic match.
+
+Now, with the field created, implemented and activated, we are ready to start using it.
+
 
 ## The Result
 
