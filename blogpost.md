@@ -25,8 +25,9 @@ In order to use a custom phonetic algorithm, we will implement a TokenFilters fo
 
 ## The Fields and Field Types
 
-The documents and their fields, as well as the field types, are defined in our [schema.xml](https://github.com/kvalle/norphoname/blob/master/schema.xml).
-The documents represent persons, with names and birth dates:
+The documents and their fields, as well as the field types, are defined in our [schema.xml](https://github.com/kvalle/norphoname/blob/master/schema.xml) file.
+
+In our example, the documents represent persons, with names and birth dates:
 
 	<fields>
 		<field name="id" type="string" indexed="true" stored="true" />
@@ -61,17 +62,17 @@ The last filter, however, is one we'll need to provide.
 
 ## Make the new field searchable
 
-`solrconfig.xml`
-
-
-## The analyzer/filter chain
+*TODO: describe `solrconfig.xml`, discuss the **select** controller and the dismax query handler, and how it's used to enable searching on the phonetic field.*
 
 
 ## The FilterFactory
 
+*TODO: discuss the filterfactories specified in the analyzer filter chain, and describe the implementation.*
 
 ## The Filter
 
+*TODO: discuss the actual implementation of the filter class.*
 
 ## The Result
 
+*TODO: present an example query with results to show the search working, and refer to the working example on github.*
