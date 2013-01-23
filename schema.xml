@@ -25,24 +25,14 @@
 	</types>
 
 	<fields>
-		<field name="id" type="string" indexed="true" stored="true" required="true" />
-		<field name="first_name" type="string" indexed="false" stored="true" required="false" />
-		<field name="middle_name" type="string" indexed="false" stored="true" required="false" />
-		<field name="last_name" type="string" indexed="false" stored="true" required="false" />
-		<field name="birth_date" type="string" indexed="true" stored="false" required="false" />
-
-		<field name="name" type="text_general" indexed="true" stored="false" multiValued="true" />
-		<field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true" />
+		<field name="id" type="string" indexed="true" stored="true" />
+		<field name="name" type="text_general" indexed="true" stored="true" />
+		<field name="name_phonetic" type="phonetic" indexed="true" stored="false" />
+		<field name="birth_date" type="string" indexed="true" stored="false" />
 	</fields>
 
 	<uniqueKey>id</uniqueKey>
 
-	<copyField source="first_name" dest="name" />
-	<copyField source="middle_name" dest="name" />
-	<copyField source="last_name" dest="name" />
-
-	<copyField source="first_name" dest="name_phonetic" />
-	<copyField source="middle_name" dest="name_phonetic" />
-	<copyField source="last_name" dest="name_phonetic" />
+	<copyField source="name" dest="name_phonetic" />
 
 </schema>
