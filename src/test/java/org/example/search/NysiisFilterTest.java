@@ -10,8 +10,8 @@ import org.junit.Test;
 public class NysiisFilterTest extends BaseTokenStreamTestCase {
 	
 	@Test
-	public void testAtFonetiskFilterFungerer() throws Exception {
-	    StringReader reader = new StringReader("Gunner Hansen");
+	public void testThatPhoneticFilterWorks() throws Exception {
+	    StringReader reader = new StringReader("Gunnar Hansen");
 	    MockTokenizer tokenizer = new MockTokenizer(reader, MockTokenizer.WHITESPACE, false);
 		TokenStream stream = new NysiisFilter(tokenizer);
 	    assertTokenStreamContents(stream, new String[] { "GANAR", "HANSAN" });

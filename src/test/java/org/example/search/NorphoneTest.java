@@ -10,8 +10,6 @@ public class NorphoneTest {
 	public void testNorphoneEncoding() throws Exception {
 		assertEquals(Norphone.encode("Pål"), Norphone.encode("Paal"));
 		assertEquals(Norphone.encode("Pål"), Norphone.encode("Paul"));
-		System.out.println(Norphone.encode("Ola"));
-		System.out.println(Norphone.encode("Nordmann"));
 	}
 	
 }

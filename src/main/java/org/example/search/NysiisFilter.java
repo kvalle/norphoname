@@ -8,7 +8,7 @@ import org.apache.lucene.analysis.TokenStream;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
 public final class NysiisFilter extends TokenFilter {
-	private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
+	private final CharTermAttribute termAttribute = addAttribute(CharTermAttribute.class);
 	private final Nysiis encoder;
 
 	public NysiisFilter(TokenStream input) {
@@ -19,24 +19,24 @@ public final class NysiisFilter extends TokenFilter {
 	@Override
 	public final boolean incrementToken() throws IOException {
 		if (input.incrementToken()) {
-			String navn = new String(termAtt.buffer()).substring(0, termAtt.length());
-			String fonetiskRepresentasjon = encoder.encode(navn);
+			String name = new String(termAttribute.buffer()).substring(0, termAttribute.length());
+			String phoneticRepresentation = encoder.encode(name);
 			
-			settBuffer(fonetiskRepresentasjon);
-			termAtt.setLength(fonetiskRepresentasjon.length());
+			setBuffer(phoneticRepresentation);
+			termAttribute.setLength(phoneticRepresentation.length());
 			return true;
 		}
 		return false;
 	}
 
-	private void settBuffer(String rep) {
-		int lengde = rep.length();
-		if (lengde > termAtt.length()) {
-			termAtt.resizeBuffer(lengde);
+	private void setBuffer(String representation) {
+		int length = representation.length();
+		if (length > termAttribute.length()) {
+			termAttribute.resizeBuffer(length);
 		}
-		char[] buffer = termAtt.buffer();
-		for (int i = 0; i < lengde; i++) {
-			buffer[i] = rep.charAt(i);
+		char[] buffer = termAttribute.buffer();
+		for (int i = 0; i < length; i++) {
+			buffer[i] = representation.charAt(i);
 		}
 	}
 
