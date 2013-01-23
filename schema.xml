@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<schema name="example" version="1.5">
+	<types>
+		<!-- The StrField type is not analyzed, but indexed/stored verbatim. -->
+		<fieldType name="string" class="solr.StrField" sortMissingLast="true" />
+
+		<!-- General purpose text type -->
+		<fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
+			<analyzer>
+				<!-- Creates tokens by lowercasing all letters and dropping non-letters. Example: "I can't" ==> "i", "can", "t" -->
+				<tokenizer class="solr.LowerCaseTokenizerFactory" />
+			</analyzer>
+		</fieldType>
+
+		<fieldtype name="phonetic" stored="false" indexed="true" class="solr.TextField">
+		    <analyzer>
+		    	<!-- Creates tokens by simply splitting on  whitespace.  -->
+		        <tokenizer class="solr.WhitespaceTokenizerFactory"/>
+		        <!-- Splits words into subwords and performs optional transformations on subword groups. Example: "Bob-Kåre" ==> "Bob", "Kåre" -->
+		        <filter class="solr.WordDelimiterFilterFactory" generateWordParts="1" catenateWords="1" />
+		        <filter class="solr.LowerCaseFilterFactory" />
+		        <filter class="org.example.search.NorwegianNamesFilterFactory" />
+		    </analyzer>
+		</fieldtype>
+	</types>
+
+	<fields>
+		<field name="id" type="string" indexed="true" stored="true" required="true" />
+		<field name="first_name" type="string" indexed="false" stored="true" required="false" />
+		<field name="middle_name" type="string" indexed="false" stored="true" required="false" />
+		<field name="last_name" type="string" indexed="false" stored="true" required="false" />
+		<field name="birth_date" type="string" indexed="true" stored="false" required="false" />
+
+		<field name="name" type="text_general" indexed="true" stored="false" multiValued="true" />
+		<field name="name_phonetic" type="phonetic" indexed="true" stored="false" multiValued="true" />
+	</fields>
+
+	<uniqueKey>id</uniqueKey>
+
+	<copyField source="first_name" dest="name" />
+	<copyField source="middle_name" dest="name" />
+	<copyField source="last_name" dest="name" />
+
+	<copyField source="first_name" dest="name_phonetic" />
+	<copyField source="middle_name" dest="name_phonetic" />
+	<copyField source="last_name" dest="name_phonetic" />
+
+</schema>
