@@ -3,8 +3,6 @@ package org.example.indexer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 
 import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.impl.HttpSolrServer;
@@ -13,45 +11,52 @@ import org.apache.solr.common.SolrInputDocument;
 public class IndexerApp {
 
 	private static String url = "http://localhost:8983/solr/";
-	private static HttpSolrServer solrCore;
+	private static int number = 100;
+	private static HttpSolrServer solrCore = new HttpSolrServer(url);
+	private static int batchSize = 10;
 
 	public static void main(String[] args) throws Exception {
 		print("Indekserer mot " + url);
 		long start = System.currentTimeMillis();
-		indekser(hentPersoner());
+		indekser(number);
 		long stop = System.currentTimeMillis();
 		print("Ferdig etter " + ((stop - start) / 1000) + "s");
-	}
-	
-	private static List<Map<String, String>> hentPersoner() {
-		return null;
 	}
 
 	private static void print(Object txt) {
 		System.out.println(new java.util.Date() + ": " + txt);
 	}
 
-	private static void indekser(List<Map<String,String>> personer) throws ClassNotFoundException, SolrServerException, IOException {
-		solrCore = new HttpSolrServer(url);
-
+	private static void indekser(int antall) throws ClassNotFoundException, SolrServerException, IOException {
 		int kunderIndeksert = 0;
 
 		Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
 		SolrInputDocument doc = null;
 
-		for (Map<String,String> person : personer) {
+		for (int i = 1; i <= antall; i++) {
 			kunderIndeksert++;
 			doc = new SolrInputDocument();
-			doc.addField("id", person.get("kunde_id"));
-			doc.addField("name", person.get("name"));
-			doc.addField("birth_date", person.get("fodselsdato"));
+			doc.addField("id", "" + i);
+			doc.addField("name", "");
+			doc.addField("birth_date", "");
+			doc.addField("phone_number", "");
 			docs.add(doc);
-			solrCore.add(docs);
-			solrCore.commit();
-			docs.clear();
+		
+			if (i % batchSize == 0)
+				commit(docs);
+		}
+
+		if (!docs.isEmpty()) {
+			commit(docs);
 		}
 
 		print("Totalt: " + kunderIndeksert + "\n");
+	}
+
+	private static void commit(Collection<SolrInputDocument> docs) throws SolrServerException, IOException {
+		solrCore.add(docs);
+		solrCore.commit();
+		docs.clear();
 	}
 
 }
