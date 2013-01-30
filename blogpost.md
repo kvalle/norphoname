@@ -65,11 +65,18 @@ The last filter, however, is one we'll need to provide.
 ## The FilterFactory
 
 *TODO: discuss the filterfactories specified in the analyzer filter chain, and describe the implementation.*
-
+Responsible for instantiating a filter.
 
 ## The Filter
 
 *TODO: discuss the actual implementation of the filter class.*
+
+The class extends the TokenFilter class in lucene and we override the `increaseToken()` method. 
+This method handles the stream of tokens, in our case, letters are processed based on their phonetic meaning and alignment. 
+Our phonetic algorithm is defined in `Norphone.java`. This class holds a set of phonetic 'rules' that describe and grammatical characterizations for the norwegian language. 
+
+*Set buffer*
+
 
 
 ## Make the new field searchable
