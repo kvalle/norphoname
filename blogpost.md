@@ -8,17 +8,17 @@ In this blogpost we will show how to implement a custom `TokenFilter` in Lucene.
 This can be used for a number of things, but our specific example will be how to implement a custom phonetic search.
 
 This post won't be a complete beginners introduction to Solr or Lucene, so some familiarity is expected.
-However, you shouldn't need to know much more than you would from playing with the [Solr documentation example](http://lucene.apache.org/solr/api-4_0_0-BETA/doc-files/tutorial.html).
+However, you shouldn't need to know much more than you would from playing with the [Solr documentation example](http://lucene.apache.org/solr/api-4_0_0-BETA/doc-files/tutorial.html). If you haven't used solr before, or is interested in our example data, we have bundled an instance with the data used in this example.
 
 
 ## Use Case: Phonetic Search
 
-A phonetic algorithm is a way to represent take a word as input, and convert this to a digest representing the way the word sounds when spoken.
-Words sounding roughly the same should thus be represented the same way by the algorithm, and when searching words sounding like the query should match its phonetic digest.
+A phonetic algorithm is used to index a given word based on its pronunciation. It takes a word as input, and converts this to a digest representing the way the word sounds when spoken.
+Words sounding roughly the same should thus be represented the same way by the algorithm, and when searching words sounding like the query should match its phonetic digest.  
 
 Solr already supports four different phonetic algorithms: [Soundex](http://en.wikipedia.org/wiki/Soundex), RefinedSoundex, [Metaphone](http://en.wikipedia.org/wiki/Metaphone) and DoubleMetaphone.
 For many practical purposes, one of these four will suffice.
-In some situations, such as when searching for norwegian names, these four just dosn't cut it.
+In some situations, such as when searching for norwegian names, these four just dosen't cut it.
 
 In order to use a custom phonetic algorithm, we will implement a TokenFilters for this purpose.
 
