@@ -65,6 +65,9 @@ The last filter, however, is one we'll need to provide.
 ## The FilterFactory
 
 *TODO: discuss the filterfactories specified in the analyzer filter chain, and describe the implementation.*
+
+*Hook from solr into the filter factory*
+
 Responsible for instantiating a filter.
 
 ## The Filter
@@ -73,9 +76,18 @@ Responsible for instantiating a filter.
 
 The class extends the TokenFilter class in lucene and we override the `increaseToken()` method. 
 This method handles the stream of tokens, in our case, letters are processed based on their phonetic meaning and alignment. 
-Our phonetic algorithm is defined in `Norphone.java`. This class holds a set of phonetic 'rules' that describe and grammatical characterizations for the norwegian language. 
+Our phonetic algorithm is defined in `Norphone.java`. This class holds a set of phonetic 'rules' that describe and contains grammatical characterizations for the norwegian language. Below is an excerpt from our filter class. 
 
-*Set buffer*
+	if (input.incrementToken()) {
+		String name = new String(termAttribute.buffer()).substring(0, termAttribute.length());
+		String phoneticRepresentation = Norphone.encode(name);
+
+		setBuffer(phoneticRepresentation);
+		termAttribute.setLength(phoneticRepresentation.length());
+		return true;
+	}
+
+For each input name, we take the whole name and encode it using the norphone phonetic class. Since a phonetic algorithm is sensitive for letter alignment, we encode the whole name in one operation. The result from the encoder is the actual phonetic representation of the name. When the encoding is done, we put the phonetic representation in the `termAttribute` buffer. The buffer is returned out of the filter and stored.
 
 
 
