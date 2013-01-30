@@ -16,25 +16,25 @@ public class IndexerApp {
 	private static int batchSize = 10;
 
 	public static void main(String[] args) throws Exception {
-		print("Indekserer mot " + url);
+		print("Indexing " + url);
 		long start = System.currentTimeMillis();
-		indekser(number);
+		indexer(number);
 		long stop = System.currentTimeMillis();
-		print("Ferdig etter " + ((stop - start) / 1000) + "s");
+		print("Done after " + ((stop - start) / 1000) + "s");
 	}
 
 	private static void print(Object txt) {
 		System.out.println(new java.util.Date() + ": " + txt);
 	}
 
-	private static void indekser(int antall) throws ClassNotFoundException, SolrServerException, IOException {
-		int kunderIndeksert = 0;
+	private static void indexer(int number) throws ClassNotFoundException, SolrServerException, IOException {
+		int persons = 0;
 
 		Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
 		SolrInputDocument doc = null;
 
-		for (int i = 1; i <= antall; i++) {
-			kunderIndeksert++;
+		for (int i = 1; i <= number; i++) {
+			persons++;
 			doc = new SolrInputDocument();
 			doc.addField("id", "" + i);
 			doc.addField("name", "");
@@ -50,7 +50,7 @@ public class IndexerApp {
 			commit(docs);
 		}
 
-		print("Totalt: " + kunderIndeksert + "\n");
+		print("Total: " + persons + "\n");
 	}
 
 	private static void commit(Collection<SolrInputDocument> docs) throws SolrServerException, IOException {
