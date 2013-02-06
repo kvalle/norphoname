@@ -11,14 +11,12 @@ import org.apache.solr.common.SolrInputDocument;
 public class IndexerApp {
 
 	private static String url = "http://localhost:8983/solr/";
-	private static int number = 100;
 	private static HttpSolrServer solrCore = new HttpSolrServer(url);
-	private static int batchSize = 10;
 
 	public static void main(String[] args) throws Exception {
 		print("Indexing " + url);
 		long start = System.currentTimeMillis();
-		indexer(number);
+		indexer();
 		long stop = System.currentTimeMillis();
 		print("Done after " + ((stop - start) / 1000) + "s");
 	}
@@ -27,30 +25,36 @@ public class IndexerApp {
 		System.out.println(new java.util.Date() + ": " + txt);
 	}
 
-	private static void indexer(int number) throws ClassNotFoundException, SolrServerException, IOException {
-		int persons = 0;
-
+	private static void indexer() throws ClassNotFoundException, SolrServerException, IOException {
 		Collection<SolrInputDocument> docs = new ArrayList<SolrInputDocument>();
-		SolrInputDocument doc = null;
 
-		for (int i = 1; i <= number; i++) {
-			persons++;
-			doc = new SolrInputDocument();
-			doc.addField("id", "" + i);
-			doc.addField("name", "");
-			doc.addField("birth_date", "");
-			doc.addField("phone_number", "");
-			docs.add(doc);
-		
-			if (i % batchSize == 0)
-				commit(docs);
-		}
+		int personId = 0;
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
 
 		if (!docs.isEmpty()) {
 			commit(docs);
 		}
 
-		print("Total: " + persons + "\n");
+		print("Total: " + personId + "\n");
+	}
+
+	private static SolrInputDocument createPerson(int id, String pnumber, String bdate, String name) {
+		SolrInputDocument doc = new SolrInputDocument();
+		doc.addField("id", name + id);
+		doc.addField("name", name);
+		doc.addField("birth_date", bdate);
+		doc.addField("phone_number", pnumber);
+		return doc;
 	}
 
 	private static void commit(Collection<SolrInputDocument> docs) throws SolrServerException, IOException {
