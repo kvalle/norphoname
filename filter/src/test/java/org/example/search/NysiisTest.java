@@ -22,7 +22,7 @@ public class NysiisTest {
 	
 	@Test
 	public void testEnkelOgDobbelEnkodingErLik() throws Exception {
-		String enkel = encoder.encode("Børre");
+		String enkel = encoder.encode("BÃ¸rre");
 		String dobbel = encoder.encode(enkel);
 		assertEquals(dobbel, enkel);
 	}
