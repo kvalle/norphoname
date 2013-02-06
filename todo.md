@@ -8,3 +8,4 @@ TODO
   	- Lage en eksempelspørring + resultat som illustrerer at fonetisk søk fungerer
 - Rydde opp i github-repo (plassing av solr config filer, etc)
 - få maven til å bygge jar med og uten dependencies og/eller lage standalone .jar til IndexerApp
+- rydde opp i, og tests, boostrap.sh
