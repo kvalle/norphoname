@@ -1,11 +1,12 @@
 TODO
 ====
 
+- få til å starte solr med filter jar-en.
+- Rydde i solrconfig.xml
+- slette unødige filer fra conf/
+- gjøre ferdig IndexerApp så den indekserer et set med fornuftige test-personer
+- pakke IndexerApp så den kan kjøres med `java -jar indexer.jar`
 - Skrive manglende deler i bloggposten
-- Sette opp en solr-instans og:
-  - Rydde i solrconfig.xml
-  - Generere en indeks full av testdata og
-  	- Lage en eksempelspørring + resultat som illustrerer at fonetisk søk fungerer
-- Rydde opp i github-repo (plassing av solr config filer, etc)
-- få maven til å bygge jar med og uten dependencies og/eller lage standalone .jar til IndexerApp
-- rydde opp i, og tests, boostrap.sh
+  - Lage en eksempelspørring + resultat som illustrerer at fonetisk søk fungerer
+- Skrive README om hvordan eksempelet funker 
+  (hva som ligger i filters/, hvordan starte solr-appen, hordan generere data med indexer.jar)
