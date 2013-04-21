@@ -2,10 +2,10 @@ package org.example.search;
 
 import java.util.Map;
 
-import org.apache.solr.analysis.BaseTokenFilterFactory;
+import org.apache.lucene.analysis.util.TokenFilterFactory;
 import org.apache.lucene.analysis.TokenStream;
 
-public class NysiisFilterFactory extends BaseTokenFilterFactory {
+public class NysiisFilterFactory extends TokenFilterFactory {
 	Map<String, String> args;
 
 	public Map<String, String> getArgs() {
