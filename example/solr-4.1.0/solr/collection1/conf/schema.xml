@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <schema name="example" version="1.5">
+	
+	<fields>
+		<field name="id" type="string" indexed="true" stored="true" />
+		<field name="name" type="text_general" indexed="true" stored="true" />
+		<field name="name_phonetic" type="phonetic" indexed="true" stored="false" />
+		<field name="birth_date" type="string" indexed="false" stored="true" />
+		<field name="phone_number" type="string" indexed="false" stored="true" />
+	</fields>
+
+	<uniqueKey>id</uniqueKey>
+
+	<copyField source="name" dest="name_phonetic" />
+
+
 	<types>
 		<!-- The StrField type is not analyzed, but indexed/stored verbatim. -->
 		<fieldType name="string" class="solr.StrField" sortMissingLast="true" />
@@ -24,16 +38,5 @@
 		</fieldtype>
 	</types>
 
-	<fields>
-		<field name="id" type="string" indexed="true" stored="true" />
-		<field name="name" type="text_general" indexed="true" stored="true" />
-		<field name="name_phonetic" type="phonetic" indexed="true" stored="false" />
-		<field name="birth_date" type="string" indexed="false" stored="true" />
-		<field name="phone_number" type="string" indexed="false" stored="true" />
-	</fields>
-
-	<uniqueKey>id</uniqueKey>
-
-	<copyField source="name" dest="name_phonetic" />
-
+	
 </schema>

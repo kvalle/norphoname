@@ -30,16 +30,16 @@ public class IndexerApp {
 
 		int personId = 0;
 		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
-		docs.add(createPerson(personId++, "123456789", "2000-02-13", "hans-ole hansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "per arne hanssen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "jon larsen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "john pedro"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "lars jonathan perdersen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "birte johansen"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "berit johansson"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "ole kristian"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "kristen giftemål"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "vilde giftemaal"));
+		docs.add(createPerson(personId++, "123456789", "2000-02-13", "vidar ole-arne"));
 
 		if (!docs.isEmpty()) {
 			commit(docs);
